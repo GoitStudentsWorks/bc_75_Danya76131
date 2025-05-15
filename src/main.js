@@ -2,6 +2,8 @@ import './js/header.js';
 import './js/hero.js';
 import './js/artists.js';
 import './js/artists-modal.js';
+import './js/api.js'
 import './js/about-us.js';
 import './js/feedback.js';
 import './js/footer.js';
+import './js/api.js'
