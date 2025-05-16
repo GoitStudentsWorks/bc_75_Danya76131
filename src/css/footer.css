@@ -18,6 +18,7 @@
 .footer-logo .icon {
   width: 116px;
   height: 45px;
+  color: var(--color-affair);
 }
 .footer-nav {
   display: flex;
