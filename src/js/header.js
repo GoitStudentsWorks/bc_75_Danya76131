@@ -1,7 +1,7 @@
 
   const burgerBtn = document.querySelector('.header-burger-btn');
   const mobileMenu = document.querySelector('.header-mobile-menu');
-  const closeBtn = document.querySelector('.header-modile-menu-close');
+  const closeBtn = document.querySelector('.header-mobile-menu-close');
 
   // Відкрити меню
   burgerBtn.addEventListener('click', () => {
