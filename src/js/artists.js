@@ -40,6 +40,8 @@ const refs = {
 document.addEventListener('DOMContentLoaded', handlePageFirstArtistsLoad);
 refs.artistsLoadMoreBtnEl.addEventListener('click', handleLoadMoreArtistBtn);
 refs.artistsListEl.addEventListener('click', handleLearnMoreBtnOnArtistList);
+document.addEventListener('keydown', onEscKeyPress);
+refs.artistModalEl.addEventListener('click', onBackdropClick);
 
 async function handlePageFirstArtistsLoad() {
   try {
@@ -57,6 +59,7 @@ async function handlePageFirstArtistsLoad() {
 async function handleLoadMoreArtistBtn() {
   try {
     showArtistLoader();
+    lockLoadMoreBtn();
     if (!paginator.isArtistLeft()) {
       console.log('no more artists');
       hideArtistLoader();
@@ -72,6 +75,7 @@ async function handleLoadMoreArtistBtn() {
     console.log(error);
   } finally {
     hideArtistLoader();
+    unlockLoadMoreBtn();
   }
 }
 
@@ -81,16 +85,32 @@ async function handleLearnMoreBtnOnArtistList(e) {
   }
   try {
     showArtistLoader();
-    const artistId = e.target.closest('li').id;
+
+    const artistId = e.target.closest('.artists-list-item').id;
+    const genres = e.target
+      .closest('.artists-list-item')
+      .children[1].outerText.split('\n');
     const artist = await getArtistById(artistId);
-    console.log(artist);
+
     openArtistModal();
-    renderSingleArtistModalCard(artist);
+    renderSingleArtistModalCard(artist, genres);
   } catch (error) {
     console.log(error.message);
   } finally {
     hideArtistLoader();
   }
+}
+
+// === lock/unlock load more btn ===
+
+function lockLoadMoreBtn() {
+  refs.artistsLoadMoreBtnEl.disabled = true;
+  refs.artistsLoadMoreBtnEl.classList.add('is-disabled');
+}
+
+function unlockLoadMoreBtn() {
+  refs.artistsLoadMoreBtnEl.disabled = false;
+  refs.artistsLoadMoreBtnEl.classList.remove('is-disabled');
 }
 
 // === artist list markup ===
@@ -132,9 +152,9 @@ function createArtistMarkup(obj = {}) {
               type="button"
               class="artists-learn-more-btn js-learn-more-btn"
             >
-              Learn more
-              <svg class="learn-more-svg" width="24" height="24">
-                <use href="/src/img/sprite.svg#icon-learn-more"></use>
+              Learn More
+              <svg class="learn-more-svg" width="8" height="15">
+                <use href="/img/sprite.svg#icon-learn-more"></use>
               </svg>
             </button>
           </li>
@@ -199,80 +219,104 @@ function hideArtistLoader() {
 
 function openArtistModal() {
   refs.artistModalEl.classList.add('artist-is-open');
+  document.body.classList.add('modal-open');
 }
 
 function closeArtistModal() {
   refs.artistModalEl.classList.remove('artist-is-open');
+  document.body.classList.remove('modal-open');
+}
+
+function onEscKeyPress(e) {
+  if (e.key === 'Escape') {
+    closeArtistModal();
+  }
+}
+
+function onBackdropClick(e) {
+  if (e.target === e.currentTarget) {
+    closeArtistModal();
+  }
 }
 
 // === render artist by id ===
 
-function renderSingleArtistModalCard(artist = {}) {
+function renderSingleArtistModalCard(artist = {}, genres = []) {
   refs.artistModalEl.insertAdjacentHTML(
     'beforeend',
-    createSingleArtistMarkup(artist)
+    createSingleArtistMarkup(artist, genres)
   );
 }
 
-function createSingleArtistMarkup(obj = {}) {
+function createSingleArtistMarkup(obj = {}, array = []) {
   const {
     strArtistThumb,
     strArtist,
     strLabel,
     intFormedYear,
     intDiedYear,
-    genres = [],
     strGender,
     intMembers,
     strCountry,
     strBiographyEN,
     tracksList = [],
   } = obj;
+  console.log(tracksList);
 
-  const genresMarkup = checkIfArtistHasGenres(genres);
+  const genresMarkup = checkIfArtistHasGenres(array);
 
   return `
-  <div class="artist-modal-container"> 
-  <p class="artist-modal-title">${strArtist}</p>
+  <div class="artist-modal-container">
+  <button type="button" class="artist-modal-backdrop-close-btn">
+    <svg class="artist-backdrop-close-icon" width="24" height="24">
+      <use href="/img/sprite.svg#icon-x-close"></use>
+    </svg>
+  </button>
+  <p class="artist-modal-title">${strArtist ? strArtist : 'Artist'}</p>
   <div class="artist-modal-about-wrapper">
   <div class="artist-modal-img-wrapper">
-      <img src=${
+      <img class="art-mod-img" src=${
         strArtistThumb
           ? strArtistThumb
           : 'https://placehold.co/600x400?text=Oups!+No+Image'
-      } alt=${strArtist} />
+      } alt=${strArtist ? strArtist : 'Artist'} />
     </div>
-    <div class="artist-modal-artist-info-wrapper"
+    <div class="artist-modal-info-wrapper">
       <ul class="art-mod-years-sex">
         <li class="art-mod-years">
           Years active
-          <p>${intFormedYear}-${intDiedYear ? intDiedYear : 'present'}</p>
+          <p>${Number(intFormedYear) > 0 ? intFormedYear : 'no exact data'} - 
+          ${intDiedYear || 'present'}</p>
         </li>
         <li class="art-mod-sex">
           Sex
-          <p>${strGender}</p>
+          <p>${strGender ? strGender : 'human'}</p>
         </li>
       </ul>
       <ul class="art-mod-members-country">
         <li class="art-mod-members">
           Members
-          <p>${intMembers}</p>
+          <p>${intMembers ? intMembers : 'no exact data'}</p>
         </li>
         <li class="art-mod-country">
           Country
-          <p>${strCountry}</p>
+          <p>${strCountry ? strCountry : 'no exact data'}</p>
         </li>
       </ul>
-      <ul class="art-mod-bio">
+      <ul class="art-mod-biography">
         <li class="art-mod-bio">
           Biography
-          <p>${strBiographyEN}</p>
+          <p>${strBiographyEN ? strBiographyEN : 'no exact data'}</p>
         </li>
       </ul>
-      <ul class="single-art-tags">
+      <ul class="artist-item-tags-list">
       ${genresMarkup}
       </ul>
       </div>
     </div>
     </div>`;
+}
+
+function createArtistAlbums(array = []) {
+  const { intDuration, movie, strAlbum, strArtist, strTrack, _id } = array;
 }
