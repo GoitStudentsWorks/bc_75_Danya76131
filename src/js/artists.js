@@ -30,11 +30,17 @@ async function getArtistById(id = '') {
 
 // === main ===
 
+const NO_IMAGE = 'https://placehold.co/600x400?text=Oups!+No+Image';
+const NO_BIO = 'Not much to tell about this artist';
+const NO_GENRES = "It's hard to tell the genre";
+const NO_INFO = 'No exact data';
+
 const refs = {
   artistsListEl: document.querySelector('.js-artists-list'),
   artistsLoaderEl: document.querySelector('.artist-loader.loader'),
   artistsLoadMoreBtnEl: document.querySelector('.js-load-more-btn'),
   artistModalEl: document.querySelector('.js-artist-modal'),
+  artistModalLoaderEl: document.querySelector('.artist-modal-loader.loader'),
 };
 
 document.addEventListener('DOMContentLoaded', handlePageFirstArtistsLoad);
@@ -44,8 +50,8 @@ document.addEventListener('keydown', onEscKeyPress);
 refs.artistModalEl.addEventListener('click', onBackdropClick);
 
 async function handlePageFirstArtistsLoad() {
+  showArtistLoader();
   try {
-    showArtistLoader();
     const { artists, totalArtists } = await getArtistsData();
     renderArtistList(artists);
     paginator.setTotal(totalArtists);
@@ -57,9 +63,9 @@ async function handlePageFirstArtistsLoad() {
 }
 
 async function handleLoadMoreArtistBtn() {
+  showArtistLoader();
+  lockLoadMoreBtn();
   try {
-    showArtistLoader();
-    lockLoadMoreBtn();
     if (!paginator.isArtistLeft()) {
       console.log('no more artists');
       hideArtistLoader();
@@ -80,11 +86,15 @@ async function handleLoadMoreArtistBtn() {
 }
 
 async function handleLearnMoreBtnOnArtistList(e) {
-  if (e.target.nodeName !== 'BUTTON') {
+  const learnMoreBtn = e.target.closest('.js-learn-more-btn');
+  if (e.target.nodeName !== 'BUTTON' || !learnMoreBtn) {
     return;
   }
   try {
-    showArtistLoader();
+    showArtistModalLoader();
+
+    learnMoreBtn.disabled = true;
+    learnMoreBtn.classList.add('is-disabled');
 
     const artistId = e.target.closest('.artists-list-item').id;
     const genres = e.target
@@ -94,10 +104,22 @@ async function handleLearnMoreBtnOnArtistList(e) {
 
     openArtistModal();
     renderSingleArtistModalCard(artist, genres);
+
+    document.addEventListener('click', function (e) {
+      if (e.target.classList.contains('bio-toggle-btn')) {
+        const bioText = e.target.previousElementSibling;
+        bioText.classList.toggle('expanded');
+        e.target.textContent = bioText.classList.contains('expanded')
+          ? 'Show less'
+          : 'Show more';
+      }
+    });
   } catch (error) {
     console.log(error.message);
   } finally {
-    hideArtistLoader();
+    hideArtistModalLoader();
+    learnMoreBtn.classList.remove('is-disabled');
+    learnMoreBtn.disabled = false;
   }
 }
 
@@ -109,8 +131,8 @@ function lockLoadMoreBtn() {
 }
 
 function unlockLoadMoreBtn() {
-  refs.artistsLoadMoreBtnEl.disabled = false;
   refs.artistsLoadMoreBtnEl.classList.remove('is-disabled');
+  refs.artistsLoadMoreBtnEl.disabled = false;
 }
 
 // === artist list markup ===
@@ -132,10 +154,8 @@ function createArtistMarkup(obj = {}) {
   return `<li class="artists-list-item" id=${_id}>
   <div class="artist-item-img-wrapper">
             <img class="artists-list-item-img" src=${
-              strArtistThumb
-                ? strArtistThumb
-                : 'https://placehold.co/600x400?text=Oups!+No+Image'
-            } alt=${strArtist} />
+              strArtistThumb ? strArtistThumb : NO_IMAGE
+            } alt="${strArtist}" />
             </div>
             <ul class="artist-item-tags-list">
             ${genresMarkup}
@@ -143,9 +163,7 @@ function createArtistMarkup(obj = {}) {
             <ul class="artist-item-info-list">
               <li class="artist-info-name">${strArtist}</li>
               <li class="artist-info-bio">${
-                strBiographyEN
-                  ? strBiographyEN
-                  : 'Not much to tell about this artist'
+                strBiographyEN ? strBiographyEN : NO_BIO
               }</li>
             </ul>
             <button
@@ -163,7 +181,7 @@ function createArtistMarkup(obj = {}) {
 
 function checkIfArtistHasGenres(genres = []) {
   if (genres.length === 0) {
-    return `<li class="artist-tags-genres">It's hard to tell the genre</li>`;
+    return `<li class="artist-tags-genres">${NO_GENRES}</li>`;
   }
 
   return genres
@@ -215,6 +233,14 @@ function hideArtistLoader() {
   refs.artistsLoaderEl.style.display = 'none';
 }
 
+function showArtistModalLoader() {
+  refs.artistModalLoaderEl.style.display = 'block';
+}
+
+function hideArtistModalLoader() {
+  refs.artistModalLoaderEl.style.display = 'none';
+}
+
 // === open/close modal ===
 
 function openArtistModal() {
@@ -225,6 +251,7 @@ function openArtistModal() {
 function closeArtistModal() {
   refs.artistModalEl.classList.remove('artist-is-open');
   document.body.classList.remove('modal-open');
+  deleteSingleArtistModalCard();
 }
 
 function onEscKeyPress(e) {
@@ -234,12 +261,17 @@ function onEscKeyPress(e) {
 }
 
 function onBackdropClick(e) {
-  if (e.target === e.currentTarget) {
+  const modalCloseBtn = e.target.closest('.artist-modal-backdrop-close-btn');
+  if (e.target === e.currentTarget || modalCloseBtn) {
     closeArtistModal();
   }
 }
 
 // === render artist by id ===
+
+function deleteSingleArtistModalCard() {
+  refs.artistModalEl.innerHTML = '';
+}
 
 function renderSingleArtistModalCard(artist = {}, genres = []) {
   refs.artistModalEl.insertAdjacentHTML(
@@ -252,7 +284,6 @@ function createSingleArtistMarkup(obj = {}, array = []) {
   const {
     strArtistThumb,
     strArtist,
-    strLabel,
     intFormedYear,
     intDiedYear,
     strGender,
@@ -261,9 +292,9 @@ function createSingleArtistMarkup(obj = {}, array = []) {
     strBiographyEN,
     tracksList = [],
   } = obj;
-  console.log(tracksList);
 
   const genresMarkup = checkIfArtistHasGenres(array);
+  const albumsMarkup = createArtistAlbums(tracksList);
 
   return `
   <div class="artist-modal-container">
@@ -275,17 +306,15 @@ function createSingleArtistMarkup(obj = {}, array = []) {
   <p class="artist-modal-title">${strArtist ? strArtist : 'Artist'}</p>
   <div class="artist-modal-about-wrapper">
   <div class="artist-modal-img-wrapper">
-      <img class="art-mod-img" src=${
-        strArtistThumb
-          ? strArtistThumb
-          : 'https://placehold.co/600x400?text=Oups!+No+Image'
-      } alt=${strArtist ? strArtist : 'Artist'} />
+      <img class="art-mod-img" src="${
+        strArtistThumb ? strArtistThumb : NO_IMAGE
+      }" alt="${strArtist ? strArtist : 'Artist'}" />
     </div>
     <div class="artist-modal-info-wrapper">
       <ul class="art-mod-years-sex">
         <li class="art-mod-years">
           Years active
-          <p>${Number(intFormedYear) > 0 ? intFormedYear : 'no exact data'} - 
+          <p>${Number(intFormedYear) > 0 ? intFormedYear : NO_INFO} - 
           ${intDiedYear || 'present'}</p>
         </li>
         <li class="art-mod-sex">
@@ -296,27 +325,85 @@ function createSingleArtistMarkup(obj = {}, array = []) {
       <ul class="art-mod-members-country">
         <li class="art-mod-members">
           Members
-          <p>${intMembers ? intMembers : 'no exact data'}</p>
+          <p>${intMembers ? intMembers : NO_INFO}</p>
         </li>
         <li class="art-mod-country">
           Country
-          <p>${strCountry ? strCountry : 'no exact data'}</p>
+          <p>${strCountry ? strCountry : NO_INFO}</p>
         </li>
       </ul>
       <ul class="art-mod-biography">
         <li class="art-mod-bio">
           Biography
-          <p>${strBiographyEN ? strBiographyEN : 'no exact data'}</p>
+          <p class="bio-text">${strBiographyEN ? strBiographyEN : NO_BIO}</p>
+    <button class="bio-toggle-btn" type="button">Show more</button>
         </li>
       </ul>
-      <ul class="artist-item-tags-list">
-      ${genresMarkup}
-      </ul>
+      <ul class="artist-item-tags-list">${genresMarkup}</ul>
       </div>
+    </div>
+    <div class="modal-artist-albums-wrapper">
+      <p class="modal-artist-albums-title">Albums</p>
+      <ul class="modal-artist-albums-list">${albumsMarkup}</ul>
     </div>
     </div>`;
 }
 
 function createArtistAlbums(array = []) {
-  const { intDuration, movie, strAlbum, strArtist, strTrack, _id } = array;
+  const markup = [];
+  const albumsList = array.reduce((res, track) => {
+    if (!res.includes(track.strAlbum)) {
+      res.push(track.strAlbum);
+    }
+    return res;
+  }, []);
+
+  for (const title of albumsList) {
+    const songs = array
+      .filter(track => track.strAlbum === title)
+      .map(createAlbumSongsList)
+      .join('');
+
+    markup.push(
+      `<li class="modal-artist-albums-item">
+      <p class="alb-list-title">${title}</p>
+      <table class="single-album-table">
+        <thead>
+          <tr class="album-head">
+            <th>Track</th>
+            <th>Time</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody class="album-table-body">${songs}</tbody>
+      </table>
+    </li>`
+    );
+  }
+
+  return markup.join('');
+}
+
+function createAlbumSongsList(obj = {}) {
+  const { intDuration, movie, strTrack, _id } = obj;
+  const youTubeBtn = `<svg class="artist-backdrop-youTube-icon" width="24" height="24">
+      <use href="/img/sprite.svg#icon-youtube"></use>
+    </svg>`;
+
+  const time = formatDuration(Number(intDuration));
+
+  return `<tr class="table-songs" id=${_id}>
+            <td>${strTrack}</td>
+            <td>${time}</td>
+            <td><a href="${movie ? movie : '#'}" target="_blank">${
+    movie ? youTubeBtn : ''
+  }</a></td>
+          </tr>`;
+}
+
+function formatDuration(ms) {
+  const totalSeconds = Math.floor(ms / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }

@@ -17,7 +17,6 @@
     align-items: center;
     justify-content: center;
 
-
     transition: opacity 250ms ease, visibility 250ms ease;
 
     &.artist-is-open {
@@ -36,9 +35,34 @@
     max-height: 90vh;
     box-sizing: border-box;
 
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 48px;
+
     overflow-y: auto;
     position: relative;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+    &::-webkit-scrollbar {
+        width: 15px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        border: 2px solid transparent;
+        background-clip: padding-box;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+    }
 }
 
 .artist-modal-backdrop-close-btn {
@@ -46,13 +70,20 @@
     top: 16px;
     right: 16px;
     background: transparent;
+    border-radius: 33%;
     border: none;
     cursor: pointer;
+
+    transition: background-color 222ms ease-in-out;
+
+    &:hover {
+        box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5), inset 0 -2px 1px 0 var(--opacity-neutral-darkest-5), inset 0 0 0 1px var(--opacity-white-10);
+        background-color: var(--opacity-white-10);
+    }
 }
 
 .artist-modal-title {
     font-family: var(--second-family);
-    margin-bottom: 48px;
     font-weight: 700;
     font-size: 32px;
     line-height: 1.3;
@@ -71,7 +102,7 @@
 .artist-modal-img-wrapper {
     flex: 1 1 50%;
     max-width: 50%;
-    aspect-ratio: 2.7 / 2.2;
+    aspect-ratio: 3.1 / 2;
     overflow: hidden;
     border-radius: 16px;
 }
@@ -131,18 +162,208 @@
     display: flex;
     flex-direction: column;
     font-weight: 600;
+}
 
-    & p {
-        word-break: break-word;
-        display: -webkit-box;
-        -webkit-line-clamp: 10;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-weight: 400;
+.bio-text {
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 9;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+.bio-text.expanded {
+    display: block;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+    overflow: visible;
+}
+
+.bio-toggle-btn {
+    padding: 5px 0;
+    align-self: start;
+    background: transparent;
+    border: none;
+    color: var(--color-scheme-1-text);
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: underline;
+    border-radius: 6px;
+
+    transition: background-color 222ms ease-in-out;
+
+    &:hover {
+        box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5), inset 0 -2px 1px 0 var(--opacity-neutral-darkest-5), inset 0 0 0 1px var(--opacity-white-10);
+        background-color: var(--opacity-white-10);
     }
 }
 
 .modal-open {
     overflow: hidden;
+}
+
+.artist-modal-loader.loader {
+    display: none;
+    margin: 32px auto;
+
+    width: 24px;
+    height: 24px;
+    position: relative;
+    border-radius: 50%;
+    color: #FF3D00;
+    animation: fill 1s ease-in infinite alternate;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        left: 48px;
+        top: 0;
+        animation: fill 250ms ease-in infinite alternate;
+    }
+
+    &::after {
+        left: auto;
+        right: 48px;
+        animation-duration: 333ms;
+    }
+}
+
+@keyframes fill {
+    0% {
+        box-shadow: 0 0 0 2px inset
+    }
+
+    100% {
+        box-shadow: 0 0 0 10px inset
+    }
+}
+
+.modal-artist-albums-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-artist-albums-title {
+    font-family: var(--second-family);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--color-scheme-1-text);
+}
+
+.modal-artist-albums-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+}
+
+.modal-artist-albums-item {
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 12px;
+
+    border-radius: 16px;
+    padding: 14px 11px;
+
+    background-color: var(--color-scheme-2-foreground);
+}
+
+.alb-list-title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-scheme-1-text);
+}
+
+.single-album-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--color-scheme-1-text);
+    background: var(--color-scheme-2-foreground);
+    overflow: hidden;
+    border-radius: 8px;
+    table-layout: fixed;
+}
+
+.single-album-table thead {
+    background: var(--opacity-white-5);
+    font-weight: 600;
+    font-size: 10px;
+}
+
+.single-album-table th,
+.single-album-table td {
+    padding: 7px 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.single-album-table th:nth-child(1),
+.single-album-table td:nth-child(1) {
+    width: 60%;
+    text-align: left;
+}
+
+.single-album-table th:nth-child(2),
+.single-album-table td:nth-child(2) {
+    width: 20%;
+    text-align: center;
+}
+
+.single-album-table th:nth-child(3),
+.single-album-table td:nth-child(3) {
+    width: 20%;
+    text-align: center;
+}
+
+.album-table-body tr:nth-child(even) {
+    background: var(--opacity-white-10);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.album-table-body tr:nth-child(even):last-child td:first-child {
+    border-bottom-left-radius: 8px;
+}
+
+.album-table-body tr:nth-child(even):last-child td:last-child {
+    border-bottom-right-radius: 8px;
+}
+
+.album-table-body tr:hover {
+    background: var(--opacity-white-15);
+}
+
+.album-table-body a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.single-album-table thead tr th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.single-album-table thead tr th:last-child {
+    border-top-right-radius: 8px;
 }

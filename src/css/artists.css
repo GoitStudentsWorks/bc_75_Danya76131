@@ -126,11 +126,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
     gap: 8px;
+    padding: 8px 0;
 
     border-radius: 12px;
-    padding: 5px;
 
     font-family: var(--font-family);
     font-weight: 500;
