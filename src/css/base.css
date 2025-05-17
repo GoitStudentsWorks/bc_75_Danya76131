@@ -3,9 +3,9 @@
 body {
   color: var(--color-scheme-1-text);
   background: var(--color-scheme-1-background); ;
-  min-width: 100vw;
-  min-height: 100vh;
-  margin: 0;
+  min-width: 100%;
+  min-height: 100%;
+  margin: 0 auto;
 }
 
 main {
