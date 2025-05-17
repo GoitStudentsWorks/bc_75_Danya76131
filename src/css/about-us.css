@@ -6,12 +6,11 @@ margin: 0 auto;
 @media only screen and (min-width: 768px){
     .about-us{
     padding: 64px 32px;
-    
     }
 }
 @media only screen and (min-width: 1440px){
     .about-us{
-    padding: 112px 64px;
+    padding: 112px 0px;
     }
 }
 
@@ -22,17 +21,23 @@ margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 40px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+
 }
 @media only screen and (min-width: 768px){
     .about-us-container{
     width: 704px;
-    height: 708px;
+    
     }
 }
 @media only screen and (min-width: 1440px){
     .about-us-container{
         width: 1312px;
-        height: 664px;
+        flex-direction: row;
+        gap: 32px;
+        
     }
     
 }
@@ -41,14 +46,7 @@ margin: 0 auto;
 
 .about-us-image-container{
     width: 280px;
-    height: 168px; 
     border-radius: 16px;
-}
-
-
-.about-us-image{
-    height: 100%;
-
 }
 
 @media only screen and (min-width: 768px) {
@@ -67,31 +65,62 @@ margin: 0 auto;
     
 }
 
+.about-us-image{
+height: 100%;
 
+}
 
 
 .about-us-content-container{
     width: 280px;
-    height: 372px;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
     gap: 20px;
-}
-
-.about-us-text-container{
-width: 280px;
-height: 288px;
-display: flex;
-align-items: flex-start;
-justify-content: flex-start;
-flex-direction: column;
-gap: 20px;
-}
-.about-us-icon{
     
 }
+
+
+@media only screen and (min-width: 768px) {
+    .about-us-content-container {
+        width: 704px;
+        gap: 24px;
+    }
+}
+@media only screen and (min-width: 1440px) {
+    .about-us-content-container {
+        width: 640px;
+        justify-content: center;
+    }
+}
+
+.about-us-text-container {
+    width: 280px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 20px;  
+ }
+ @media only screen and (min-width: 768px) {
+
+     .about-us-icon {
+         width: 80px;
+         height: 80px;
+     }
+
+     .about-us-text-container {
+         width: 704px;
+         gap: 24px;
+     }
+ }
+ @media only screen and (min-width: 1440px) {
+
+     .about-us-text-container {
+         width: 640px;
+     }
+    }
 
 .about-us-title{
 font-weight: 700;
@@ -100,44 +129,24 @@ line-height: 1.2;
 letter-spacing: -0.01em;
 color: #fff;
 }
+@media only screen and (min-width: 1440px) {
+   
+    .about-us-title {
+        font-size: 60px;
+    }  
+}
+
 
 .about-us-text{
+    font-family: "IBM Plex Sans", sans-serif;
     font-weight: 400;
     font-size: 18px;
     line-height: 1.5;
     color: #fff;
 }
 @media only screen and (min-width: 768px) {
-    .about-us-content-container {
-        width: 704px;
-        height: 271px;
-        gap: 24px;
-    }
-    .about-us-icon {
-    width: 80px;
-    height: 80px;
-}
-    .about-us-text-container {
-    width: 704px;
-    height: 167px;
-    gap: 24px;
-    }
     .about-us-text {  
     font-size: 20px;
 }
 }
 
-@media only screen and (min-width: 1440px) {
-    .about-us-content-container {
-    width: 640px;
-    height: 290px;
-    
-    }
-    .about-us-text-container {
-    width: 640px;
-    height: 186px;
-    }
-    .about-us-title {
-        font-size: 60px;
-    }  
-}
