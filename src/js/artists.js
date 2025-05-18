@@ -228,6 +228,16 @@ function checkIfArtistHasImg(link = '', name) {
   }"/>`;
 }
 
+function renderModalImg(link = '', name) {
+  if (!link) {
+    return `<div class="artist-placeholder">
+  <span>${name || 'Artist'}</span>
+</div>`;
+  }
+
+  return `<img class="art-mod-img" src=${link} alt="${name || 'Artist'}"/>`;
+}
+
 // === pagination ===
 
 const paginator = {
@@ -338,7 +348,7 @@ function createSingleArtistMarkup(obj = {}, array = []) {
 
   const genresMarkup = checkIfArtistHasGenres(array);
   const albumsMarkup = createArtistAlbums(tracksList);
-  const imgMarkup = checkIfArtistHasImg(strArtistThumb, strArtist);
+  const imgMarkup = renderModalImg(strArtistThumb, strArtist);
 
   return `
   <div class="artist-modal-container">
