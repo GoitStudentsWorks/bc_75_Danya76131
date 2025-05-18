@@ -208,14 +208,17 @@
 }
 
 .artist-modal-img-wrapper {
+    margin: 0 auto;
     aspect-ratio: 272 / 167;
-    max-width: 100%;
+    width: 100%;
+    max-width: 272px;
     overflow: hidden;
     border-radius: 16px;
 }
 
 @media only screen and (min-width: 768px) {
     .artist-modal-img-wrapper {
+        max-width: 654px;
         aspect-ratio: 654 / 402;
     }
 }
@@ -235,16 +238,19 @@
 }
 
 .artist-modal-info-wrapper {
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 16px;
     min-width: 0;
-    max-width: 100%;
+    width: 100%;
+    max-width: 272px;
     overflow-wrap: break-word;
 }
 
 @media only screen and (min-width: 768px) {
     .artist-modal-info-wrapper {
+        max-width: 654px;
         gap: 24px;
     }
 }
@@ -311,7 +317,21 @@
     font-weight: 600;
 }
 
+@media only screen and (min-width: 768px) {
+    .art-mod-biography {
+        max-width: 654px;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .art-mod-biography {
+        max-width: 100%;
+    }
+}
+
 .bio-text {
+    max-width: 272px;
+    width: 100%;
     max-height: calc(1.5em * 7);
     overflow-y: auto;
     padding-right: 4px;
@@ -336,9 +356,17 @@
 
 @media only screen and (min-width: 768px) {
     .bio-text {
+        max-width: 654px;
+
         &::-webkit-scrollbar {
             width: 6px;
         }
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .bio-text {
+        max-width: 100%;
     }
 }
 
@@ -347,11 +375,25 @@
 }
 
 .modal-artist-albums-wrapper {
+    width: 100%;
+    max-width: 272px;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
     gap: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+    .modal-artist-albums-wrapper {
+        max-width: 654px;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .modal-artist-albums-wrapper {
+        max-width: 100%;
+    }
 }
 
 .modal-artist-albums-title {
