@@ -289,6 +289,8 @@
 }
 
 .artist-placeholder {
+    min-width: 272px;
+    min-height: 167px;
     width: 100%;
     height: 100%;
     background-color: var(--opacity-white-10);
