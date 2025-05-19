@@ -70,6 +70,7 @@
   text-align: center;
   padding-top: 24px;
   padding-bottom: 16px;
+  margin: auto;
 }
 .footer-copy-logo-wrapper::after {
   content: '';
