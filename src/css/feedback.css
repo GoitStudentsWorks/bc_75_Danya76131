@@ -96,14 +96,6 @@
     display: flex;
 }
 
-.swiper-slide {}
-
-
-
-
-
-
-
 
 /* картка - рейтинг текст нейм */
 .feedback-card {
@@ -122,9 +114,7 @@
     gap: 4px;
 }
 
-@media (min-width: 768px) {
-    .feedback-card .feedback-rating {}
-}
+
 
 @media (min-width: 1440px) {
     .feedback-card .feedback-rating {
@@ -175,9 +165,6 @@
     margin-top: 0px;
 }
 
-@media (min-width: 768px) {
-    .feedback-card .feedback-name {}
-}
 
 @media (min-width: 1440px) {
     .feedback-card .feedback-name {
@@ -193,7 +180,7 @@
 .feedback-section {
     margin: 0 auto;
     min-width: 320px;
-    padding: 64px 20px;
+
 }
 
 .feedback-swiper {
@@ -482,9 +469,6 @@
     }
 }
 
-@media (min-width: 1440px) {
-    .btn-close {}
-}
 
 
 .btn-close:active {
@@ -726,11 +710,6 @@
 
     }
 }
-
-@media (min-width: 1440px) {
-    .star {}
-}
-
 
 
 
