@@ -193,7 +193,11 @@ function createArtistMarkup(obj = {}) {
             >
               Learn More
               <svg class="learn-more-svg" width="8" height="15">
-                <use href="img/sprite.svg#icon-learn-more"></use>
+
+                <use href="/src/public/img/artists.svg#icon-learn-more"></use>
+
+              
+
               </svg>
             </button>
           </li>
