@@ -193,7 +193,7 @@ function createArtistMarkup(obj = {}) {
             >
               Learn More
               <svg class="learn-more-svg" width="8" height="15">
-                <use href="/sprite.svg#icon-learn-more"></use>
+                <use href="./sprite.svg#icon-learn-more"></use>
               </svg>
             </button>
           </li>
@@ -354,7 +354,7 @@ function createSingleArtistMarkup(obj = {}, array = []) {
   <div class="artist-modal-container">
   <button type="button" class="artist-modal-backdrop-close-btn">
     <svg class="artist-backdrop-close-icon" width="32" height="32">
-      <use href="/sprite.svg#icon-x-close"></use>
+      <use href="./sprite.svg#icon-x-close"></use>
     </svg>
   </button>
   <p class="artist-modal-title">${strArtist || 'Artist'}</p>
