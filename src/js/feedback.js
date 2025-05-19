@@ -72,16 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbacks = await fetchFeedback();
     const swiperWrapper = document.querySelector('.swiper-wrapper');
     const paginationContainer = document.querySelector('.custom-pagination');
-    
-    
-    // ошибка не видит врапер
-    
-    // if (!swiperWrapper || !paginationContainer) {
-    //   console.warn('❗ Swiper wrapper або pagination container не знайдено на сторінці');
-    //   console.log('swiperWrapper:', swiperWrapper);
-    //   console.log('paginationContainer:', paginationContainer);
-    //   return;
-    // }
+  
   
     swiperWrapper.innerHTML = '';
     paginationContainer.innerHTML = '';
