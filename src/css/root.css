@@ -59,9 +59,19 @@
   --color-error-red: #af0404;
 }
 
-/* html.light-theme {
+body {
+  background-color: var(--color-scheme-1-background);
+  color: var(--color-scheme-1-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 2) Переопределяем переменные при тёмном режиме */
+html.darkmode {
+  /* вместо тёмного фона из :root, ставим светлый */
   --color-scheme-1-background: var(--color-neutral-lightest);
+  /* текст наоборот делаем тёмным */
   --color-scheme-1-text: var(--color-neutral-darkest);
+  /* бордюры/акценты по желанию */
   --color-scheme-1-border: var(--opacity-neutral-darkest-20);
   --color-scheme-1-accent: var(--color-neutral-darkest);
-} */
+}
