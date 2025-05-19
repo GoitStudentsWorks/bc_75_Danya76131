@@ -105,7 +105,7 @@
 
 .background-wrapper {
     box-sizing: border-box;
-    background-image: url(../img/hero/mob-hero.png);
+    background-image: url(/img/hero/mob-hero.png);
     background-repeat: no-repeat;
     background-position: center bottom;
     height: 385px;
@@ -136,7 +136,7 @@
 
 @media screen and (min-resolution: 192dpi) and (max-width: 767px) {
     .background-wrapper {
-        background-image: url(../img/hero/mob-hero@2x.png);
+        background-image: url(/img/hero/mob-hero@2x.png);
         background-size: contain;
         /* background-position: center; */
         background-repeat: no-repeat;
@@ -147,7 +147,7 @@
 
 @media only screen and (min-resolution: 96dpi) and (min-width: 768px) {
     .background-wrapper {
-        background-image: url(../img/hero/tab-hero.png);
+        background-image: url(/img/hero/tab-hero.png);
         height: 632px;
     }
 
@@ -164,7 +164,7 @@
 
 @media screen and (min-resolution: 192dpi) and (min-width: 768px) {
     .background-wrapper {
-        background-image: url(../img/hero/tab-hero@2x.png);
+        background-image: url(/img/hero/tab-hero@2x.png);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -191,7 +191,7 @@
     }
 
     .background-wrapper {
-        background-image: url(../img/hero/desk-hero.png);
+        background-image: url(/img/hero/desk-hero.png);
         background-position: 91.5% 100%;
         width: 641px;
         height: 900px;
@@ -203,7 +203,7 @@
 
 @media screen and (min-resolution: 192dpi) and (min-width: 1440px) {
     .background-wrapper {
-        background: url(../img/hero/desk-hero@2x.png);
+        background: url(/img/hero/desk-hero@2x.png);
         width: 641px;
         height: 900px;
         background-size: cover;
