@@ -1,4 +1,6 @@
-
+html{
+  scroll-behavior: smooth;
+}
 
 body {
   color: var(--color-scheme-1-text);
@@ -6,6 +8,7 @@ body {
   min-width: 100%;
   min-height: 100%;
   margin: 0 auto;
+
 }
 
 main {
