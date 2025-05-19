@@ -1,0 +1,98 @@
+:root {
+  --base-color: white;
+  --base-variant: #e8e9ed;
+  --text-color: #111528;
+  --secondary-text: #232738;
+  --primary-color: #3a435d;
+  --accent-color: #0071ff;
+}
+
+/* 2. Параметры тёмного режима */
+html.darkmode {
+  --base-color: #070b1d;
+  --base-variant: #101425;
+  --text-color: #ffffff;
+  --secondary-text: #a4a5b8;
+  --primary-color: #3a435d;
+  --accent-color: #0071ff;
+}
+
+/* 3. Сброс и общие стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  min-height: 100vh;
+  background-color: var(--base-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 4. Разметка */
+header,
+section {
+  padding: 70px min(50px, 7%);
+}
+section {
+  background-color: var(--base-variant);
+}
+p {
+  margin: 10px 0 20px;
+  color: var(--secondary-text);
+}
+
+/* 5. Кнопки */
+button {
+  font: inherit;
+  border: none;
+  cursor: pointer;
+}
+button.cta-button {
+  padding: 0.8em 2em;
+  background-color: var(--accent-color);
+  color: var(--base-color);
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+/* 6. Переключатель темы */
+#theme-switch {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  background-color: var(--base-variant);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+#theme-switch:hover {
+  filter: brightness(1.1);
+}
+#theme-switch svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--primary-color);
+  transition: opacity 0.3s ease;
+}
+/* По умолчанию показываем только солнце*/
+#theme-switch svg:last-child {
+  display: none;
+}
+/* В тёмном режиме показываем только луну */
+html.darkmode #theme-switch svg:first-child {
+  display: none;
+}
+html.darkmode #theme-switch svg:last-child {
+  display: block;
+}
