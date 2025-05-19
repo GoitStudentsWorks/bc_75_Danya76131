@@ -1,3 +1,5 @@
+import spriteUrl from '/img/sprite.svg';
+
 // === api ===
 import axios from 'axios';
 
@@ -44,7 +46,7 @@ Quibusdam, voluptatum ut tenetur soluta fugit qui incidunt corporis. Ea, maiores
 const NO_GENRES = `mix`;
 const NO_INFO = '-';
 const You_Tube_Btn = `<svg class="artist-backdrop-youTube-icon" width="24" height="24">
-      <use href="/img/sprite.svg#icon-youtube"></use>
+      <use href="${spriteUrl}#icon-youtube"></use>
     </svg>`;
 const NO_ALBUMS = 'No albums found';
 
@@ -193,7 +195,7 @@ function createArtistMarkup(obj = {}) {
             >
               Learn More
               <svg class="learn-more-svg" width="8" height="15">
-                <use href="/img/sprite.svg#icon-learn-more"></use>
+                <use href="${spriteUrl}#icon-learn-more"></use>
               </svg>
             </button>
           </li>
@@ -354,7 +356,7 @@ function createSingleArtistMarkup(obj = {}, array = []) {
   <div class="artist-modal-container">
   <button type="button" class="artist-modal-backdrop-close-btn">
     <svg class="artist-backdrop-close-icon" width="32" height="32">
-      <use href="/img/sprite.svg#icon-x-close"></use>
+      <use href="${spriteUrl}#icon-x-close"></use>
     </svg>
   </button>
   <p class="artist-modal-title">${strArtist || 'Artist'}</p>
