@@ -7,7 +7,7 @@
   transition: text-shadow 0.3s ease;
 }
 .footer-nav-link:hover {
-  text-shadow: 0 0 3px white, 0 0 5px white;
+  text-shadow: 0 0 1px white, 0 0 1px white;
 }
 
 .footer-logo {

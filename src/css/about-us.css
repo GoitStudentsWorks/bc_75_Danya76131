@@ -123,6 +123,7 @@ height: 100%;
     }
 
 .about-us-title{
+font-family: var(--second-family);
 font-weight: 700;
 font-size: 44px;
 line-height: 1.2;

@@ -52,7 +52,7 @@
     transition: text-shadow 0.3s ease;
   }
   .header-link:hover {
-    text-shadow: 0 0 3px white, 0 0 5px white;
+    text-shadow: 0 0 1px white, 0 0 1px white;
   }
   .header-logo .icon {
     color: var(--color-scheme-2-accent);
