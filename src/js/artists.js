@@ -79,15 +79,15 @@ async function handleLoadMoreArtistBtn() {
   showArtistLoader();
   lockLoadMoreBtn();
 
-  if (!paginator.isArtistLeft()) {
-    showErrorMessage('No more artists');
-    hideArtistLoader();
-    hideLoadMoreBtn();
-    return;
-  }
   try {
     paginator.setNewPage();
     const newPage = paginator.getPage();
+    if (!paginator.isArtistLeft()) {
+      showErrorMessage('No more artists');
+      hideArtistLoader();
+      hideLoadMoreBtn();
+      return;
+    }
 
     const response = await getArtistsData(newPage);
     if (!response) {
