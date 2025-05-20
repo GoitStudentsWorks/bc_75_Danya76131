@@ -115,15 +115,6 @@
 }
 
 
-
-@media (min-width: 1440px) {
-    .feedback-card .feedback-rating {
-        margin-top: 59px;
-
-
-    }
-}
-
 .feedback-card .feedback-text {
     font-family: "Epilogue", sans-serif;
     font-weight: 700;

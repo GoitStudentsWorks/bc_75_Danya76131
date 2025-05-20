@@ -56,11 +56,6 @@ height: 100%;
 
 .about-us-content-container{
     width: 280px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-direction: column;
-    gap: 20px;
     
 }
 
@@ -78,31 +73,24 @@ height: 100%;
     }
 }
 
-.about-us-text-container {
-    width: 280px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-direction: column;
-    gap: 20px;  
- }
+.about-us-icon,.about-us-title{
+    margin-bottom: 20px;
+}
+ 
  @media only screen and (min-width: 768px) {
 
      .about-us-icon {
          width: 80px;
          height: 80px;
+         margin-bottom: 24px;
      }
+         .about-us-title{margin-bottom: 24px;}
 
-     .about-us-text-container {
-         width: 704px;
-         gap: 24px;
-     }
+     
  }
  @media only screen and (min-width: 1440px) {
 
-     .about-us-text-container {
-         width: 640px;
-     }
+
     }
 
 .about-us-title{
