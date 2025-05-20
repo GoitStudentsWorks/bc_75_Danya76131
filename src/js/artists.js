@@ -45,7 +45,7 @@ Saepe aperiam debitis ipsum laborum officia, assumenda quia consectetur corrupti
 Quibusdam, voluptatum ut tenetur soluta fugit qui incidunt corporis. Ea, maiores est! Cumque maxime, officia consequatur nisi rem laboriosam assumenda. Voluptate reprehenderit adipisci ab magnam quo temporibus exercitationem repudiandae ut?`;
 const NO_GENRES = `mix`;
 const NO_INFO = '-';
-const You_Tube_Btn = `<svg class="artist-backdrop-youTube-icon" width="24" height="24">
+const You_Tube_Btn = `<svg class="artist-backdrop-youTube-icon" width="24" height="24" fill="currentColor">
 
       <use href="${spriteUrl}#icon-youtube"></use>
     </svg>`;
@@ -195,7 +195,7 @@ function createArtistMarkup(obj = {}) {
               class="artists-learn-more-btn js-learn-more-btn"
             >
               Learn More
-              <svg class="learn-more-svg" width="8" height="15">
+              <svg class="learn-more-svg" width="8" height="15" fill="currentColor">
 
                 <use href="${spriteUrl}#icon-learn-more"></use>
 
@@ -358,7 +358,7 @@ function createSingleArtistMarkup(obj = {}, array = []) {
   return `
   <div class="artist-modal-container">
   <button type="button" class="artist-modal-backdrop-close-btn">
-    <svg class="artist-backdrop-close-icon" width="32" height="32">
+    <svg class="artist-backdrop-close-icon" width="32" height="32" fill="currentColor">
 
       <use href="${spriteUrl}#icon-x-close"></use>
 

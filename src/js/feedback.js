@@ -1,9 +1,9 @@
 import Swiper from 'swiper';
-  import 'swiper/css';
-  import 'swiper/css/navigation';
-  import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Navigation } from 'swiper/modules';
 
-  // console.log('feedback block:', document.querySelector('.feedback'));
+// console.log('feedback block:', document.querySelector('.feedback'));
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM is ready');
@@ -12,8 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     console.warn('Feedback section отсутствует на этой странице');
     return;
   }
-
-  
 
   // лоадер
   function showLoader() {
@@ -41,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const iconId = isFilled ? 'icon-star-filled' : 'icon-star-empty';
 
       stars.push(`
-      <svg class="star-icon" width="20" height="20">
+      <svg class="star-icon" width="20" height="20" fill="currentColor">
         <use href="#${iconId}"></use>
       </svg>
     `);
@@ -49,9 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     return stars.join('');
   }
-
-
-
 
   async function fetchFeedback() {
     showLoader();
@@ -72,8 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbacks = await fetchFeedback();
     const swiperWrapper = document.querySelector('.swiper-wrapper');
     const paginationContainer = document.querySelector('.custom-pagination');
-  
-  
+
     swiperWrapper.innerHTML = '';
     paginationContainer.innerHTML = '';
 
@@ -102,7 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
       slidesPerView: 1,
       spaceBetween: 0,
       on: {
-        slideChange: () => updatePagination(swiper.realIndex, swiper.slides.length),
+        slideChange: () =>
+          updatePagination(swiper.realIndex, swiper.slides.length),
       },
     });
 
@@ -124,9 +119,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updatePagination(activeIndex, slideCount) {
-      const [leftDot, centerDot, rightDot] = document.querySelectorAll('.pagination-dot');
+      const [leftDot, centerDot, rightDot] =
+        document.querySelectorAll('.pagination-dot');
       leftDot.classList.toggle('active', activeIndex === 0);
-      centerDot.classList.toggle('active', activeIndex !== 0 && activeIndex !== slideCount - 1);
+      centerDot.classList.toggle(
+        'active',
+        activeIndex !== 0 && activeIndex !== slideCount - 1
+      );
       rightDot.classList.toggle('active', activeIndex === slideCount - 1);
     }
 
@@ -141,13 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePagination(swiper.realIndex, feedbacks.length);
   }
 
-  
-  
-    setTimeout(() => {
-      initFeedbackSwiper();
-    }, 200); 
-  
-  
+  setTimeout(() => {
+    initFeedbackSwiper();
+  }, 200);
 
   // Модальне вікно
   const modal = document.querySelector('.modal');
@@ -211,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
     inputs.forEach(input => input.classList.remove('error'));
   }
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
 
     const name = form.elements.name.value.trim();
@@ -255,13 +250,16 @@ document.addEventListener('DOMContentLoaded', () => {
     showLoader();
 
     try {
-      const response = await fetch('https://sound-wave.b.goit.study/api/feedbacks', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(feedbackData),
-      });
+      const response = await fetch(
+        'https://sound-wave.b.goit.study/api/feedbacks',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(feedbackData),
+        }
+      );
 
       if (!response.ok) throw new Error('Error');
 
@@ -274,4 +272,4 @@ document.addEventListener('DOMContentLoaded', () => {
       hideLoader();
     }
   });
-})
+});
