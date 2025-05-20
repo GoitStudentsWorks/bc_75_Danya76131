@@ -5,6 +5,7 @@
   |============================
 */
 /* Common styles */
+@import 'modern-normalize';
 @import url('./root.css');
 @import url('./reset.css');
 @import url('./base.css');
