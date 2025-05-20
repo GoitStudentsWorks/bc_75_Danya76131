@@ -42,9 +42,9 @@
   display: none;
 }
 
-html.darkmode #theme-switch svg:first-child {
+html.lightmode #theme-switch svg:first-child {
   display: none;
 }
-html.darkmode #theme-switch svg:last-child {
+html.lightmode #theme-switch svg:last-child {
   display: block;
 }

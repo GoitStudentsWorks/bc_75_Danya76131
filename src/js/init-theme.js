@@ -1,4 +1,4 @@
-const mode = localStorage.getItem('darkmode');
+const mode = localStorage.getItem('lightmode');
 if (mode === 'active') {
-  document.documentElement.classList.add('darkmode');
+  document.documentElement.classList.add('lightmode');
 }

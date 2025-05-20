@@ -59,13 +59,6 @@
   --color-error-red: #af0404;
 }
 
-body {
-  background-color: var(--color-scheme-1-background);
-  color: var(--color-scheme-1-text);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* 2) Переопределяем переменные при тёмном режиме */
 html.darkmode {
   /* вместо тёмного фона из :root, ставим светлый */
   --color-scheme-1-background: var(--color-neutral-lightest);
