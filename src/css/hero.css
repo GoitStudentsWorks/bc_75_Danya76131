@@ -5,7 +5,7 @@
     line-height: 1.1;
     letter-spacing: -0.01em;
     color: #fff;
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
 .hero-subtitle {
@@ -15,11 +15,22 @@
     line-height: 1.5;
     color: #fff;
     margin-bottom: 24px;
+    max-width: 624px;
+}
+
+.hero-content {
+    width: 280px;
 }
 
 @media only screen and (min-width: 768px) {
     .hero-subtitle {
         font-size: 20px;
+        margin-bottom: 32px;
+
+    }
+
+    .hero-content {
+        width: 704px;
         margin-bottom: 32px;
     }
 
@@ -31,6 +42,9 @@
 @media only screen and (min-width: 1440px) {
     .hero-title {
         font-size: 84px;
+    }
+    .hero-content{
+        margin-bottom: 0;
     }
 }
 
@@ -54,16 +68,17 @@
     color: #fff;
     fill: #fff;
     gap: 12px;
-    box-shadow: 0 1px 2px 0 rgba(6, 3, 7, 0.05), inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(6, 3, 7, 0.15), inset 0 2px 1px 0 rgba(255, 255, 255, 0.25), inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+    box-shadow: 0 1px 2px 0 rgba(6, 3, 7, 0.05),
+        inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(6, 3, 7, 0.15),
+        inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+        inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
     background: #764191;
-
 }
 
 .hero-button:hover,
 .hero-button:focus {
     background: #5f3177;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15),
-        inset 0 -2px 1px rgba(0, 0, 0, 0.3),
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 -2px 1px rgba(0, 0, 0, 0.3),
         inset 0 2px 1px rgba(255, 255, 255, 0.2);
     outline: none;
     transition: background 0.2s ease, box-shadow 0.2s ease;
@@ -81,14 +96,11 @@
         max-width: 206px;
         gap: 4;
         padding: 10px 0;
-
     }
 }
 
 /* ============================= */
 .hero {
-    padding-right: 20px;
-    padding-left: 20px;
     min-width: 320px;
     margin: 0 auto;
     padding-bottom: 0;
@@ -96,14 +108,15 @@
     position: relative;
 }
 
-.hero-container {
+.background-wrapper {
     box-sizing: border-box;
-    background-image: url(../img/hero/mob-hero.png);
+    background-image: url(/img/hero/mob-hero.png);
     background-repeat: no-repeat;
     background-position: center bottom;
-    min-height: 967px;
+    height: 385px;
     position: relative;
     z-index: 1;
+    width: 280px;
 }
 
 .hero::before,
@@ -128,55 +141,76 @@
 }
 
 @media screen and (min-resolution: 192dpi) and (max-width: 767px) {
-    .hero-container {
-        background-image: url(../img/hero/mob-hero@2x.png);
+    .background-wrapper {
+        background-image: url(/img/hero/mob-hero@2x.png);
+        background-size: contain;
+        /* background-position: center; */
+        background-repeat: no-repeat;
+        margin-top: 64px;
+        
     }
 }
 
 @media only screen and (min-resolution: 96dpi) and (min-width: 768px) {
-
-    .hero-container {
-        background-image: url(../img/hero/tab-hero.png);
+    .background-wrapper {
+        background-image: url(/img/hero/tab-hero.png);
+        height: 632px;
+        width: 704px;
     }
 
     .hero {
         box-sizing: border-box;
-        padding: 64px 32px;
         padding-bottom: 0;
+    }
+    .hero-content{
+        width: 100%;
+        
     }
 }
 
 @media screen and (min-resolution: 192dpi) and (min-width: 768px) {
-    .hero-container {
-        background-image: url(../img/hero/tab-hero@2x.png);
-    }
-
-
+    .background-wrapper {
+        background-image: url(/img/hero/tab-hero@2x.png);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;    }
 }
 
 @media only screen and (min-resolution: 96dpi) and (min-width: 1440px) {
+    .hero-container {
+        display: flex;
+    }
+
     .hero {
         padding-top: 0;
         padding-right: 0;
         padding-left: 0;
-
     }
 
     .hero-content {
-        padding: 215px 0;
-        max-width: 640px;
+        padding-top: 135.5px;
+        padding-bottom: 78.5px;
+        width: 671px;
     }
 
-    .hero-container {
-        background-image: url(../img/hero/desk-hero.png);
+    .background-wrapper {
+        background-image: url(/img/hero/desk-hero.png);
         background-position: 91.5% 100%;
-        max-width: 1440px;
-        min-height: 900px;
+        width: 641px;
+        height: 900px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 }
 
 @media screen and (min-resolution: 192dpi) and (min-width: 1440px) {
-    .hero-container {
-        background: url(../img/hero/desk-hero@2x.png);
+    .background-wrapper {
+        background: url(/img/hero/desk-hero@2x.png);
+        width: 641px;
+        height: 900px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 }
