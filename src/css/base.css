@@ -4,7 +4,7 @@ html{
 
 body {
   color: var(--color-scheme-1-text);
-  background: var(--color-scheme-1-background); ;
+  background: var(--color-scheme-1-background); 
   min-width: 100%;
   min-height: 100%;
   margin: 0 auto;

@@ -50,6 +50,8 @@
   }
   .header-link {
     transition: text-shadow 0.3s ease;
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
   .header-link:hover {
     text-shadow: 0 0 1px white, 0 0 1px white;
