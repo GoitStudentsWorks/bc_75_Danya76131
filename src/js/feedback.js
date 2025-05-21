@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const iconId = isFilled ? 'icon-star-filled' : 'icon-star-empty';
 
       stars.push(`
-      <svg class="star-icon" width="20" height="20">
+      <svg class="star-icon" width="20" height="20" fill="currentColor">
         <use href="#${iconId}"></use>
       </svg>
     `);
@@ -133,7 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
         'active',
         activeIndex !== 0 && activeIndex !== slideCount - 1
       );
-
       rightDot.classList.toggle('active', activeIndex === slideCount - 1);
 
       rightDot.classList.contains('active')
