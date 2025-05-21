@@ -352,27 +352,9 @@ html.lightmode .single-album-table {
   }
 }
 
-.art-mod-biography {
-  display: flex;
-  flex-direction: column;
-  font-weight: 600;
-  word-break: break-word;
-  overflow-wrap: break-word;
-}
-
-@media only screen and (min-width: 768px) {
-  .art-mod-biography {
-    width: 100%;
-  }
-}
-
-@media only screen and (min-width: 1440px) {
-  .art-mod-biography {
-    max-width: 100%;
-  }
-}
 
 .bio-text {
+  font-family: var(--font-family);
   max-height: calc(1.5em * 5);
   overflow-y: auto;
   padding-right: 4px;

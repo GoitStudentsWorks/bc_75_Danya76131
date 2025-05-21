@@ -3,6 +3,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 import axios from 'axios';
 
 // console.log('feedback block:', document.querySelector('.feedback'));
@@ -323,11 +324,7 @@ function showErrorMsg() {
 function showWarnMsg() {
   iziToast.show({
     timeout: 3333,
-    progressBar: false,
-    target: '.izi',
-    overlay: false,
     message: `Please rank your feedback.`,
-    position: 'center',
-    buttons: [],
+    position: 'topLeft',
   });
 }
