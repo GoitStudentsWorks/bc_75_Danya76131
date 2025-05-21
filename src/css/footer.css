@@ -135,3 +135,7 @@ html.lightmode .footer .footer-icon-link:hover .icon {
   --color1: var(--color-affair-dark);
   --color2: var(--color-affair-dark);
 }
+html.lightmode .footer-copy-logo-wrapper::after {
+  background-color: var(--color-neutral-darkest);
+  opacity: 0.1;
+}

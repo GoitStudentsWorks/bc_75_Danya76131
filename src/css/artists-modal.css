@@ -162,6 +162,9 @@
 }
 
 .artist-modal-backdrop-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top: 16px;
   right: 16px;
@@ -169,7 +172,7 @@
   border-radius: 33%;
   border: none;
   cursor: pointer;
-
+  color: white;
   transition: background-color 222ms ease-in-out;
 
   &:hover {
@@ -179,8 +182,8 @@
     background-color: var(--opacity-white-10);
   }
 }
-html.lightmode .artist-modal-backdrop-close-btn {
-  --color2: var(--color-affair);
+html.lightmode .artist-modal-backdrop-close-btn svg {
+  fill: var(--color-affair); /* Цвет для светлой темы */
 }
 html.lightmode .artist-backdrop-youTube-icon {
   --color2: var(--color-affair);
