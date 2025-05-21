@@ -384,8 +384,8 @@ function createSingleArtistMarkup(obj = {}, array = []) {
       </ul>
       <h3 class="art-mod-biography">
           Biography
+          </h3>
           <p class="bio-text">${strBiographyEN || NO_BIO}</p>
-      </h3>
       <ul class="artist-item-tags-list">${genresMarkup}</ul>
       </div>
     </div>
